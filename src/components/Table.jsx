@@ -1,3 +1,4 @@
+import LinkContainer from "./LinkContainer"
 function TableHeader(){
     /* responsible for rendering the head of our table with the appropriate columns */
     return(
@@ -12,6 +13,8 @@ function TableHeader(){
 }
 
 const TableBody = (props) => {
+  console.log('Rendering Table with linkData:', props.linkData);
+
     // boilerplate table body functional component
     // we use Array.map to create table rows from LinkData passed via props
     const rows = props.linkData.map((row, index) => {
@@ -22,23 +25,26 @@ const TableBody = (props) => {
             <a href={row.URL}>{row.URL}</a>
           </td>
           <td>
-            <button onClick={() => props.removeLink(index)}>Delete</button>
+            <button onClick={() => props.handleRemove(index)}>Delete</button>
           </td>
         </tr>
       )
+
     })
-  
-    return <tbody>{rows}</tbody>
+
+   return <tbody>{rows}</tbody>
   }
 
 
-function Table(){
+function Table (props){
     return(
         <table>
         <TableHeader/>
-        <TableBody/>
+        <TableBody linkData={props.linkData }  handleRemove={props.handleRemove}/>
+        
         </table>
     )
 }
 
 export default Table
+

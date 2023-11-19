@@ -1,17 +1,41 @@
-function Form(){
-    return(
+import { render } from "react-dom";
+import LinkContainer from "./LinkContainer"
+import React, { useState } from "react";
+
+
+const Form = ({ handleSubmit }) => {
+    const [state, setState] = useState({
+        linkName: '',
+        url: ''
+    });
+
+    const submitForm = () => {
+        const { linkName, url } = state;
+        handleSubmit({ name: linkName, URL: url });
+        setState({ linkName: '', url: '' });
+    };
+
+    return (
         <form>
             <label for="linkName">Link Name:</label>
-            <input type="text" id="linkName" name="linkName" value="" />
-            <br />
-            <br />
+            <input type="text" name="linkName" value={state.linkName} onChange={(e) => setState({ ...state, linkName: e.target.value })}
+            />
+
+        <br />
+        <br />
+
             <label for="URL">Link URL:</label>
-            <input type="text" id="linkURL" name="linkURL" value=""/>
-            <br/>
-            <br />
-            <input type="submit" value="Submit"></input>
+            <input type="text" id="linkURL" name="linkURL" value={state.url} onChange={(e) => setState({ ...state, url: e.target.value })}
+            />
+        <br />
+        <br />
+            <button type="button" onClick={submitForm}>Submit</button>
         </form>
-    )
+
+
+    );
 }
 
-export default Form
+export default Form;
+
+
