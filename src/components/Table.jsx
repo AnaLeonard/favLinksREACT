@@ -5,8 +5,11 @@ function TableHeader(){
         <thead>
         <tr>
           <th>Name</th>
+
           <th>URL</th>
+
           <th>Remove</th>
+
         </tr>
       </thead>
     )
@@ -23,6 +26,7 @@ const TableBody = (props) => {
           <td>{row.name}</td>
           <td>
             <a href={row.URL}>{row.URL}</a>
+            <br></br>
           </td>
           <td>
             <button onClick={() => props.handleRemove(index)}>Delete</button>
